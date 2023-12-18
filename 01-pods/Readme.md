@@ -47,3 +47,18 @@ $ kubectl exec -it POD-NAME  -- SH
 ## Multi Container Pod
 
 Refer to [Demo](./04-multi-container.yml)
+
+## Init Containers
+
+- Small containers to perform initialization and till then all the main containers would be kept UNAVAILABLE to rest of cluster.
+
+- [Demo](./05-init-container.yml)
+
+### Commands :
+
+```
+$ kubectl create -f 05-init-container.yml 
+# Keep WATCHING pod status change
+$ kubectl get po pod2 -w
+## PRESS CTRL+C to stop WATCHING
+```

@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod2
+  labels:
+    name: app2
+spec:
+  initContainers:
+    - name: init1
+      image: ubuntu:latest
+      command: [ '/usr/bin/sleep', ' 10s' ]
+  containers:
+  - name: db
+    image: mahendrshinde/mysql-sample:employees
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "100m"
+    ports:
+      - containerPort: 3306

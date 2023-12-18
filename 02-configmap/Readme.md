@@ -37,3 +37,16 @@ data:
 $ kubectl apply -f 01-config.yml
 $ kubectl describe cm dbconfig
 ```
+
+## ConfigMap as Volumes
+
+- Application configuration can be mounted as volume inside container
+
+```bash
+$ kubectl apply -f 05-config.yml
+$ kubectl describe cm appsettings-demo
+$ kubectl apply -f 04-pod.yml
+$ kubectl exec -it app4 -- sh
+$ cat /vars/appsettings.k8s.json
+$ exit
+```

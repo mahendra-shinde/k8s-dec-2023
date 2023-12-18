@@ -43,3 +43,7 @@ $ kubectl exec -it POD-NAME -c CONTAINER_NAME -- SH
 # Single container pod
 $ kubectl exec -it POD-NAME  -- SH
 ```
+
+## Multi Container Pod
+
+Refer to [Demo](./04-multi-container.yml)

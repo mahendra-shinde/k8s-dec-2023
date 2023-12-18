@@ -14,7 +14,7 @@ spec:
     image: mahendrshinde/mysql-sample:employees
     resources:
       limits:
-        memory: "128Mi"
-        cpu: "100m"
+        memory: "256Mi"
+        cpu: "200m"
     ports:
       - containerPort: 3306

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app4
+  labels:
+    name: app4
+spec:
+  containers:
+  - name: db
+    image: mysql:5.7
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 3306

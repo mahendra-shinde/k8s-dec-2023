@@ -19,6 +19,18 @@ data:
 
 ```
 
+## How to use configmap reference in POD ?
+
+```yaml
+  containers:
+  - name: myapp
+    image: nginx:alpine
+    envFrom:
+    - configMapRef:
+        name: dbconfig
+        #optional: true
+```
+
 ## ConfigMap Commands
 
 ```bash

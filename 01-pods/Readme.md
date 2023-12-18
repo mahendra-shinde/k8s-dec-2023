@@ -20,3 +20,26 @@ When neither "limits" nor "requests" for resources defined | BestEffor  | Contai
 3. To delete a pod use command `kubectl delete -f FILENAME`
 
 > Replace the `FILENAME` with actual filename of pod
+
+
+## Other Commands
+
+1. View the container Logs
+
+```
+# Multi Container Pod
+$ kubectl logs POD-NAME -c CONTAINER_NAME
+
+# Single container pod
+$ kubectl logs POD-NAME
+```
+
+1. Using EXEC to debug containers
+
+```
+# Multi Container Pod
+$ kubectl exec -it POD-NAME -c CONTAINER_NAME -- SH
+
+# Single container pod
+$ kubectl exec -it POD-NAME  -- SH
+```

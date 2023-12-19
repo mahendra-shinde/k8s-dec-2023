@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app6
+  labels:
+    name: app6
+spec:
+  imagePullSecrets:
+    - name: myregistry
+  containers:
+  - name: myapp
+    image:  mahendrashinde.azurecr.io/image-resizer:latest
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 8080

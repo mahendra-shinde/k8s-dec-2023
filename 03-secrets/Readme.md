@@ -32,3 +32,14 @@ $ kubectl exec -it app5 -- sh
 $ echo "$uname $upass"
 $ exit
 ```
+
+## Using Private Container Registries
+
+```bash
+# Create `registry secret`
+$ kubectl create secret docker-registry myregistry --docker-username=mahendrashinde --docker-password=DGlUo/uisEbm8+w4bJBeOkGcvHD9/rGuBDcjozPgD1+ACRDphkSZ --docker-server=mahendrashinde.azurecr.io
+
+$ kubectl apply -f 02-pod-private-image.yml
+$ kubectl get po
+$ kubectl describe po app6
+```

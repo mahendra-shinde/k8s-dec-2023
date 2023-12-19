@@ -19,12 +19,22 @@ spec:
         # When probe FAILs, Force RESTART of Pod
         livenessProbe:
           httpGet:
-            path: /
-            scheme: HTTP
-            port: 80
+              path: /
+              scheme: HTTP
+              port: 80
           failureThreshold: 2
           periodSeconds: 10  # Every 10 seconds, repeat the probe
           timeoutSeconds: 5 # Expect Response in 5 seconds
+
+        # Wait for NGINX to create access.log
+        # Nginx would create this log file only when the NGINX process is launched successfuly
+        startupProbe:
+          exec:
+            command:
+              - ls -l /var/nginx/access.log
+          failureThreshold: 5
+          periodSeconds: 10
+          timeoutSeconds: 2
 
         resources:
           limits:

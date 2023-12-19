@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: app1
+spec:
+## Define the "Labels" on Child Pods
+  selector:
+    matchLabels:
+      set: app1
+  # Desired replica count
+  replicas: 3
+  # Pods shall receive traffic only after 5 seconds [ Optional ]
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        set: app1 ## MUST MATCH WITH line# 9
+    spec:
+      containers:
+      - name: web
+        image: mahendrshinde/myweb:1
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: '150m'
+            memory: '64Mi'
+        
+

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app5
+  labels:
+    name: app5
+spec:
+  containers:
+  - name: myapp
+    image: nginx:alpine
+    envFrom:
+    - secretRef: 
+        name: mysecrets
+    resources:
+      limits:
+        memory: "32Mi"
+        cpu: "50m"
+    ports:
+      - containerPort: 80

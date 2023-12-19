@@ -16,3 +16,19 @@ $ kubectl describe secret mysecrets
 $ kubectl get secret mysecrets -o yaml
 ## Now, k8s will share the encoded values
 ```
+
+## Inject as Environment Variables
+
+### POD 
+```yaml
+    envFrom:
+    - secretRef: 
+        name: mysecrets
+```
+
+```bash
+$ kubectl apply -f 01-pod.yml
+$ kubectl exec -it app5 -- sh
+$ echo "$uname $upass"
+$ exit
+```

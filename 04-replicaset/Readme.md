@@ -61,8 +61,8 @@ $ kubectl scale rs/app1 --replicas=1
 # Check the changes in ReplicaSet (-w to watch for changes)
 $ kubectl get rs -w 
 ## Press CTRL+C to stop watching
-## Delete all the pods [ CAUTION: Also deletes non-member pods !!! ]
-$ kubectl delete po --all
+## Delete all the pods from replicaset app1
+$ kubectl delete po -l set=app1
 # Check the changes in ReplicaSet (-w to watch for changes)
 $ kubectl get rs -w 
 ## Press CTRL+C to stop watching

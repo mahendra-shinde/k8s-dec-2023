@@ -98,3 +98,91 @@ $ kubectl get svc app
 1. Test the service using following URL
 
     `http://kubernetes.docker.internal:30001`
+
+
+## Load Balancer Service
+
+1. LoadBalancer service is extension of `NodePort` service.
+1. LoadBalancer service is `Supported` by kubernetes but `No Default Implementation` available from kubernetes.
+1.  `Docker Desktop` uses a custom load-balancer implementation which will use `localhost` as external-ip for every load-balancer type service
+1.  On `Managed Kubernetes cluster` like `AKS`, `EKS` or `GKE` the load-balancer implementation is provided by the respective cloud vendor
+
+  - Azure Kubernetes Service (AKS) uses `Azure Load Balancer`
+  - Elastic Kubernetes Service (EKS) uses `Elastic Load Balancer`
+
+## Load Balancer Service Demo
+
+1. Modify the `04-app.yml` file. replace the `Service definition` with following lines:
+
+
+<table>
+<tr>
+<th>Old `ClusterIP` Service</th>
+<th>Old `NodePort` Service</th>
+<th>New `Load Balancer` Service</th>
+</tr>
+<tr>
+<td>
+
+```yaml
+kind: Service
+metadata:
+  name: app
+spec:
+  type: ClusterIP
+  selector:
+    app: app8
+  ports:
+  - targetPort: 80
+    port: 80
+```
+</td>
+<td>
+
+```yaml
+kind: Service
+metadata:
+  name: app
+spec:
+  type: NodePort
+  selector:
+    app: app8
+  ports:
+  - targetPort: 80
+    port: 80
+    nodePort: 30001
+```
+</td>
+<td>
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: app
+spec:
+  # ClusterIP is default type
+  type: LoadBalancer
+  selector:
+    app: app8
+  ports:
+  - targetPort: 80
+    port: 8080  # Set the port to 8080
+    # Let k8s use random node-port
+```
+</td>
+</tr>
+</table>
+
+1. Delete the old service and re-apply the YAML manifest
+
+```bash
+$ kubectl delete svc app
+$ kubectl apply -f 04-app.yml
+$ kubectl get svc app
+```
+
+1. Test the service using following URL
+
+    `http://localhost:8080`
+

@@ -28,10 +28,11 @@ metadata:
   name: app
 spec:
   # ClusterIP is default type
-  type: ClusterIP
+  type: NodePort
   selector:
     app: app8
   ports:
   - targetPort: 80
     port: 80
+    nodePort: 30001 # OPTIONAL NodePort, When not defined, k8s will use RANDOM port
 

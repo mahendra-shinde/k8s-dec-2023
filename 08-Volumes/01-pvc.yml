@@ -10,28 +10,38 @@ spec:
   volumeMode: Filesystem
   storageClassName: azurefile
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
 ---
-apiVersion: v1 
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: testvol
+  name: app2
   namespace: mahendra
 spec:
-  volumes:
-  - name: vol1
-    persistentVolumeClaim:
-      claimName: vol1
-  containers:
-  - name: web
-    image: nginx:alpine
-    resources:  
-      limits:
-        cpu: "100m"
-        memory: '128Mi'
-    volumeMounts:
-    - name: vol1
-      mountPath: /data
-    ports:
-    - containerPort: 80
-    
+  replicas: 3
+  revisionHistoryLimit: 4
+  selector:
+    matchLabels:
+      app: app2
+  template:
+    metadata:
+      labels:
+        app: app2
+    spec:
+      volumes:
+      - name: vol1
+        persistentVolumeClaim:
+          claimName: vol1
+      containers:
+      - name: web
+        image: nginx:alpine
+        resources:  
+          limits:
+            cpu: "100m"
+            memory: '128Mi'
+        volumeMounts:
+        - name: vol1
+          mountPath: /data
+        ports:
+        - containerPort: 80
+        

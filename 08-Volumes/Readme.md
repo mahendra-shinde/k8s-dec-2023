@@ -29,3 +29,28 @@
     - RECYCLE: Deleting a volume will RESET or FORMAT backend storage, make it available for another new volume.
 
     - DELETE: Delete the backend storage when Volume is deleted.   
+
+
+## PVC Demo
+
+```bash
+# List all storage classes
+$ kubectl get sc
+# Deploy the PVC and Deployment object
+$ kubectl apply -f 01-pvc.yml
+$ kubectl get pvc -n mahendra
+$ kubectl get pv
+$ kubectl get pod -n mahendra
+$ kubectl -n mahendra exec PODNAME1 -- sh
+$ cd /data
+$ echo "Hello World" > file1.txt
+$ exit
+$ kubectl -n mahendra exec PODNAME2 -- sh
+$ ls /data/
+# FIle should be listed here
+$ exit
+# Clean up
+$ kubectl delete -f 01-pvc.yml
+
+
+```

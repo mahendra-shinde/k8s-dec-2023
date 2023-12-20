@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vol1
+  namespace: mahendra
+spec:
+  resources:
+    requests:
+      storage: 10Gi
+  volumeMode: Filesystem
+  storageClassName: azurefile
+  accessModes:
+    - ReadWriteOnce
+---
+apiVersion: v1 
+kind: Pod
+metadata:
+  name: testvol
+  namespace: mahendra
+spec:
+  volumes:
+  - name: vol1
+    persistentVolumeClaim:
+      claimName: vol1
+  containers:
+  - name: web
+    image: nginx:alpine
+    resources:  
+      limits:
+        cpu: "100m"
+        memory: '128Mi'
+    volumeMounts:
+    - name: vol1
+      mountPath: /data
+    ports:
+    - containerPort: 80
+    

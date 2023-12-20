@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app2
+  ############
+  namespace: mahendra
+  ############
+spec:
+  replicas: 3
+  revisionHistoryLimit: 4
+  selector:
+    matchLabels:
+      app: app2
+  template:
+    metadata:
+      labels:
+        app: app2
+    spec:
+      containers:
+      - name: myapp
+        image: mahendrshinde/myweb:1
+        resources:
+          limits:
+            memory: "32Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80

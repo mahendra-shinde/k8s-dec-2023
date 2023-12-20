@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota1
+  namespace: mahendra
+spec:
+  hard:
+    cpu: '1000m'
+    memory: '1Gi'
+    pods: '10'

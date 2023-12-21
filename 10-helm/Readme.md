@@ -46,4 +46,6 @@ $ kubectl get all -n mydata
 $ helm list -n mydata
 # UNinstall the chart and resources (Except PVC) from namespace
 $ helm uninstall -n mydata db1
+# Delete the Volume claim 
+$ kubectl delete  -n mydata $(kubectl get pvc -n mydata -o name)
 ```

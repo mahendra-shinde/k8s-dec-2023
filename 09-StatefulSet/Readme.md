@@ -79,3 +79,13 @@ $ kubectl scale sts web -n mahendra --replicas=3
 $ kubectl get po -n mahendra pod -w
 # CTRL+C
 ```
+
+# Demo : Self Heal 
+
+```bash
+$ kubectl apply -f 01-sts.yml
+$ kubectl get po -n mahendra -w
+$ kubectl delete -n mahendra web-1
+$ kubectl get po -n mahendra -w
+## The old pod web-1 is replaced with new web-1
+```

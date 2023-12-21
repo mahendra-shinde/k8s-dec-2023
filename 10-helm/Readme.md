@@ -36,3 +36,14 @@ $ helm template mysql .
 # Review the generated YAML manifest
 ```
 
+## Installing the chart in new namespace
+
+```bash
+$ kubectl create ns mydata
+$ helm install -n mydata db1 oci://registry-1.docker.io/bitnamicharts/mysql
+$ kubectl get all -n mydata
+# List all Helm charts installed inside namespace
+$ helm list -n mydata
+# UNinstall the chart and resources (Except PVC) from namespace
+$ helm uninstall -n mydata db1
+```

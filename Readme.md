@@ -13,3 +13,5 @@ Sr No | Description | Link
 9 | Stateful Set | [StatefulSet](./09-StatefulSet/Readme.md)
 10 | Helm Package manager | [Helm](./10-helm/Readme.md)
 11 | All the diagrams | [Diagrams](./K8s-Dec23.pdf)
+
+> for more demos visit my [kubernetes-demos](https://github.com/mahendra-shinde/kubernetes-demos) repository 

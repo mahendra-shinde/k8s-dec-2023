@@ -49,3 +49,45 @@ $ helm uninstall -n mydata db1
 # Delete the Volume claim 
 $ kubectl delete  -n mydata $(kubectl get pvc -n mydata -o name)
 ```
+
+## Installing Nginx Ingress controller using Helm
+
+```bash
+$ kubectl create ns mydata
+$ helm install -n mydata nginx  oci://registry-1.docker.io/bitnamicharts/nginx-ingress-controller
+$ kubectl get all -n mydata
+```
+
+## Deploying a sample application with Three `deployments` and Three `ClusterIP services`
+
+```bash
+$ kubectl create ns mahendra
+$ kubectl apply -n mahendra -f https://raw.githubusercontent.com/mahendra-shinde/kubernetes-demos/master/14-ingress/deployment.yml
+$ kubectl get all -n mahendra
+```
+
+## Deploy the Routes [Ingress rules]
+
+```
+$ kubectl apply -n mahendra -f 
+```
+
+
+## Installing Monitoring stack
+
+```
+$ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts   
+$ helm repo update
+$ kubectl create ns monitor
+$ helm install -n monitor  monitor prometheus-community/kube-prometheus-stack -f values.yml
+```
+
+## Using port-forwarding to access grafana
+
+```bash
+$ kubectl port-forward -n monitor svc/monitor-grafana 8080:80
+```
+
+> Open web browser and visit `http://localhost:8080`
+
+> Use credentials : admin / Password@1234
